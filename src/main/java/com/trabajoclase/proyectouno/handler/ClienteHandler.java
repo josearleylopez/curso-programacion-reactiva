@@ -3,6 +3,7 @@ package com.trabajoclase.proyectouno.handler;
 import com.trabajoclase.proyectouno.models.Cliente;
 import com.trabajoclase.proyectouno.services.ClienteService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.BodyInserters;
@@ -12,6 +13,7 @@ import reactor.core.publisher.Mono;
 
 import java.net.URI;
 
+@Slf4j
 @Component
 @RequiredArgsConstructor
 public class ClienteHandler {
@@ -24,6 +26,7 @@ public class ClienteHandler {
 
     public Mono<ServerResponse> findById(ServerRequest request){
         String id = request.pathVariable("id");
+        log.info("Buscando el cliente con id: " + id);
         return clienteService.findById(id).flatMap(cliente -> ServerResponse
                 .ok()
                 .contentType(MediaType.APPLICATION_JSON)

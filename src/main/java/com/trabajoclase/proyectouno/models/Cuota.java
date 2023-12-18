@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
 import java.time.LocalDate;
@@ -16,11 +17,10 @@ import java.util.UUID;
 public class Cuota {
     @Id
     private UUID id;
-    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate fecha;
     private float valor;
     private float valorCapital;
     private float valorInteres;
-    private Cliente cliente;
-
+    @Column("credito_id")
+    private UUID creditoId;
 }
